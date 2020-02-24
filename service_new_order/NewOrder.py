@@ -9,9 +9,12 @@ from Order import Order
 order1 = Order('Iphone11', '1652,10', 'luan.gomes@hotmail.com')
 order1_json = json.dumps(order1.__dict__)
 
-producer = KafkaProducer()
+try:
+  producer = KafkaProducer()
 
-producer.new_message('ECOMMERCE_NEW_ORDER', order1_json)
-producer.new_message('ECOMMERCE_SEND_EMAIL', order1.email)
+  producer.new_message('ECOMMERCE_NEW_ORDER', order1_json)
+  producer.new_message('ECOMMERCE_SEND_EMAIL', order1.email)
 
-producer.push()
+  producer.push()
+except Exception as e:
+  print(e)
