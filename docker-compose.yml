@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+
+  web:
+    build: .
+    image: web
+    container_name: web
+    ports:
+      - "9092:9092"
+    command: "python service_log_service/LogService.py"
+    volumes:
+      - .:/kafka_code
